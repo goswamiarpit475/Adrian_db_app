@@ -39,7 +39,7 @@ namespace Adrian_db_app
         {
             InitializeComponent();
             logWriterObj = new LogWriter();
-            
+
         }
         private void loadFile()
         {
@@ -95,7 +95,7 @@ namespace Adrian_db_app
                 AddNode(doc.DocumentElement, tNode);
                 treeView1.ExpandAll();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
@@ -128,11 +128,11 @@ namespace Adrian_db_app
                 inTreeNode.Text = (inXmlNode.OuterXml).Trim();
             }
         }
-        private void WriteFile(string saveLocation,string dbKey,string queryKey,string fileType)
+        private void WriteFile(string saveLocation, string dbKey, string queryKey, string fileType)
         {
 
         }
-        private void PostFileToURL(string url,string dbKey,string queryKey)
+        private void PostFileToURL(string url, string dbKey, string queryKey)
         {
 
         }
@@ -165,7 +165,7 @@ namespace Adrian_db_app
                 Ada.Fill(Dt);
                 return Dt;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 string logString = "query-->" + SqlQuery + " ||| connection string" + ConnectionString + "\n";
                 logString += ex.Message;
@@ -173,29 +173,29 @@ namespace Adrian_db_app
                 return Dt;
             }
         }
-        private void exportToFile(string s,string location,int dbkey,string queryKey,string type) 
+        private void exportToFile(string s, string location, int dbkey, string queryKey, string type)
         {
             StreamWriter sw = null;
             try
             {
                 string path = fileSaveLocation;//@"C:\Documents\{{DATABASE_KEY}}\{{QUERY_KEY}}\{{QUERY_KEY}}_{{EPOCH_TIME}}.{{TYPE}}";
-            path = path.Replace("{{DATABASE_KEY}}", dbkey.ToString());
-            path = path.Replace("{{QUERY_KEY}}", queryKey.ToString());
-            path = path.Replace("{{EPOCH_TIME}}", GetEpochTime());
-            path = path.Replace("{{TYPE}}", type);
-           
-            if (!Directory.Exists(Path.GetDirectoryName(path)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-            }
+                path = path.Replace("{{DATABASE_KEY}}", dbkey.ToString());
+                path = path.Replace("{{QUERY_KEY}}", queryKey.ToString());
+                path = path.Replace("{{EPOCH_TIME}}", GetEpochTime());
+                path = path.Replace("{{TYPE}}", type);
 
-            string Filename = path;
+                if (!Directory.Exists(Path.GetDirectoryName(path)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
+                }
 
-                    sw = new StreamWriter(Filename, false);
-                    
-                    sw.WriteLine(s);
-                    
-                    sw.Close();
+                string Filename = path;
+
+                sw = new StreamWriter(Filename, false);
+
+                sw.WriteLine(s);
+
+                sw.Close();
                 logWriterObj.LogWrite("file created successflly||||\n" + dbkey.ToString() + "|||" + queries[queryKey]);
             }
             catch (Exception Ex)
@@ -206,7 +206,7 @@ namespace Adrian_db_app
                 {
                     sw.Close();
                 }
-                logWriterObj.LogWrite("Error in exportToFile method||||\n"+dbkey.ToString()+"|||"+queryKey+"\n"+Ex.Message);
+                logWriterObj.LogWrite("Error in exportToFile method||||\n" + dbkey.ToString() + "|||" + queryKey + "\n" + Ex.Message);
             }
             finally
             {
@@ -219,14 +219,14 @@ namespace Adrian_db_app
             ds.Tables.Add(dt1); // Table 1
             string dsXml = ds.GetXml();
             MemoryStream s = new MemoryStream();
-            string response=string.Empty;
+            string response = string.Empty;
             using (StreamWriter fs = new StreamWriter(s))// (xmlFile)) // XML File Path
             {
                 ds.WriteXml(fs);
                 var res = Encoding.UTF8.GetString(s.GetBuffer(), 0, (int)s.Length);
                 response = res.ToString();
             }
-            
+
             return response;
         }
         private string GetCSVfromDataTable(DataTable Dt)
@@ -237,34 +237,34 @@ namespace Adrian_db_app
                 //StreamWriter sw = null;
                 StringBuilder sb = new StringBuilder();
                 //sw = new StreamWriter(s);
-                
-                    string Head = "";
-                    for (int j = 0; j < Dt.Columns.Count; j++)
+
+                string Head = "";
+                for (int j = 0; j < Dt.Columns.Count; j++)
+                {
+                    if (Head.Trim() != "")
                     {
-                        if (Head.Trim() != "")
-                        {
-                            Head += ",\"" + Dt.Columns[j].ColumnName + "\"";
-                        }
-                        else
-                        {
-                            Head += "\"" + Dt.Columns[j].ColumnName + "\"";
-                        }
+                        Head += ",\"" + Dt.Columns[j].ColumnName + "\"";
                     }
+                    else
+                    {
+                        Head += "\"" + Dt.Columns[j].ColumnName + "\"";
+                    }
+                }
                 sb.AppendLine(Head);
                 //sb.AppendLine();
-                    //sw.WriteLine();
-                    for (int j = 0; j < Dt.Rows.Count; j++)
+                //sw.WriteLine();
+                for (int j = 0; j < Dt.Rows.Count; j++)
+                {
+                    string[] dataArr = new String[Dt.Rows[j].ItemArray.Length];
+                    for (int i = 0; i < Dt.Rows[j].ItemArray.Length; i++)
                     {
-                        string[] dataArr = new String[Dt.Rows[j].ItemArray.Length];
-                        for (int i = 0; i < Dt.Rows[j].ItemArray.Length; i++)
-                        {
-                            object o = Dt.Rows[j].ItemArray[i].ToString();
-                            dataArr[i] = "\"" + o.ToString() + "\"";
-                        }
-                        sb.AppendLine(string.Join(",", dataArr));
+                        object o = Dt.Rows[j].ItemArray[i].ToString();
+                        dataArr[i] = "\"" + o.ToString() + "\"";
                     }
-                    //var res = Encoding.UTF8.GetString(s.GetBuffer(), 0, (int)s.Length);
-                   response= sb.ToString();
+                    sb.AppendLine(string.Join(",", dataArr));
+                }
+                //var res = Encoding.UTF8.GetString(s.GetBuffer(), 0, (int)s.Length);
+                response = sb.ToString();
             }
             else
             {
@@ -273,12 +273,13 @@ namespace Adrian_db_app
             }
             return response;
         }
-        public string postXMLData(string destinationUrl, string requestXml,string type)
+        public string postXMLData(string destinationUrl, string requestXml, string type)
         {
+            //destinationUrl = "https://httpbin.org/anything";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
             byte[] bytes;
             bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
-            request.ContentType = "text/"+type+"; encoding='utf-8'";
+            request.ContentType = "text/" + type + "; encoding='utf-8'";
             request.ContentLength = bytes.Length;
             request.Method = "POST";
             Stream requestStream = request.GetRequestStream();
@@ -305,24 +306,28 @@ namespace Adrian_db_app
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach(KeyValuePair<int,string> connectionString in connectionStrings)
+            foreach (KeyValuePair<int, string> connectionString in connectionStrings)
             {
-                foreach(KeyValuePair<string,string> query in queries)
+                foreach (KeyValuePair<string, string> query in queries)
                 {
                     string formattedQuery = GetFormattedQuery(query.Value);
                     DataTable dt = GetDataFromDB(connectionString.Value, formattedQuery);
                     if (isFileSaveEnabled)
                     {
                         //exportToCSV(dt, fileSaveLocation, connectionString.Key, query.Key);
-                        
-                        if (fileType.ToUpper() == "CSV")
+
+                        if(fileType.ToUpper() == "CSV")
                         {
-                            string csvString = GetCSVfromDataTable(dt);
-                            exportToFile(csvString, fileSaveLocation, connectionString.Key, query.Key,"csv");
+                            DataTable dt1 = new DataTable();
+                            dt1 = dt.Copy();
+                            string csvString = GetCSVfromDataTable(dt1);
+                            exportToFile(csvString, fileSaveLocation, connectionString.Key, query.Key, "csv");
                         }
                         else if (fileType.ToUpper() == "XML")
                         {
-                            string xmlString = GetXMLFromDataTable(dt);
+                            DataTable dt1 = new DataTable();
+                            dt1 = dt.Copy();
+                            string xmlString = GetXMLFromDataTable(dt1);
                             exportToFile(xmlString, fileSaveLocation, connectionString.Key, query.Key, "xml");
                         }
                     }
@@ -331,7 +336,9 @@ namespace Adrian_db_app
 
                         if (postFileType.ToUpper() == "CSV")
                         {
-                            string csvString = GetCSVfromDataTable(dt);
+                            DataTable dt1 = new DataTable();
+                            dt1 = dt.Copy();
+                            string csvString = GetCSVfromDataTable(dt1);
                             //exportToFile(csvString, fileSaveLocation, connectionString.Key, query.Key, "csv");
                             string url = postUrl;
                             url = url.Replace("{{DATABASE_KEY}}", connectionString.Key.ToString());
@@ -340,12 +347,14 @@ namespace Adrian_db_app
                         }
                         else if (postFileType.ToUpper() == "XML")
                         {
-                            string xmlString = GetXMLFromDataTable(dt);
+                            DataTable dt1 = new DataTable();
+                            dt1 = dt.Copy();
+                            string xmlString = GetXMLFromDataTable(dt1);
                             string url = postUrl;
                             url = url.Replace("{{DATABASE_KEY}}", connectionString.Key.ToString());
                             url = url.Replace("{{QUERY_KEY}}", query.Key);
                             postXMLData(url, xmlString, "xml");
-                        }      
+                        }
                     }
                 }
             }
@@ -362,7 +371,7 @@ namespace Adrian_db_app
             XmlDocument doc = new XmlDocument();
             doc.Load(currDir + @"\config.xml");
             XmlNodeList lastRunDateNodeList = doc.SelectNodes("/config/last_run_date");
-            lastRunDateNodeList[0].InnerText= toDate;
+            lastRunDateNodeList[0].InnerText = toDate;
             doc.Save(currDir + @"\config.xml");
         }
         private string GetFormattedQuery(string query)
@@ -370,7 +379,7 @@ namespace Adrian_db_app
             string formattedQuery = query;
             string lastRun = lastRunDate;
             string[] dateSplit = lastRun.Split('/');
-            DateTime fromDate = new DateTime(Convert.ToInt32(dateSplit[2]), Convert.ToInt32(dateSplit[0]),Convert.ToInt32(dateSplit[1]));
+            DateTime fromDate = new DateTime(Convert.ToInt32(dateSplit[2]), Convert.ToInt32(dateSplit[0]), Convert.ToInt32(dateSplit[1]));
             DateTime lastRunDateUpdated = fromDate.AddDays(-1);
             lastRun = lastRunDateUpdated.ToString("MM/dd/yyyy");
             string toDate = DateTime.Now.ToString("MM/dd/yyyy");

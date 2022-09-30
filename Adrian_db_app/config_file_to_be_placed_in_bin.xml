@@ -1,0 +1,107 @@
+<config>
+	<connectionStrings>
+		<connectionString key="1">Data Source=DESKTOP-AIEB1UD;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
+		<connectionString key="2">Data Source=DESKTOP-AIEB1UD;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
+		<connectionString key="3">Data Source=DESKTOP-AIEB1UD;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
+	</connectionStrings>
+	<last_run_date>09/26/2022</last_run_date>
+	<output>
+		<file>
+			<enabled>true</enabled>
+			<type>csv</type>
+			<location>C:\Documents\{{DATABASE_KEY}}\{{QUERY_KEY}}\{{QUERY_KEY}}_{{EPOCH_TIME}}.{{TYPE}}</location>
+		</file>
+		<post>
+			<enabled>true</enabled>
+			<type>xml</type>
+			<url>https://example.com/address/{{DATABASE_KEY}}/{{QUERY_KEY}}</url>
+		</post>
+	</output>
+	<queries>
+		<query key="AnalysisCode">
+			SELECT * FROM ParcelReceiving
+		</query>
+		<!--<query key="AnalysisCode">
+			SELECT * FROM AnalysisCode WHERE AnalysisCode.DateTimeCreated >= '{{FROM_DATE}}' AND AnalysisCode.DateTimeCreated &lt; '{{TO_DATE}}'
+		</query>
+		<query key="AnalysisCodeMapping">
+			SELECT * FROM AnalysisCodeMapping WHERE AnalysisCodeMapping.DateTimeCreated >= '{{FROM_DATE}}' AND AnalysisCodeMapping.DateTimeCreated &lt; '{{TO_DATE}}'
+		</query>
+		<query key="CustomerDiscountGroup">SELECT * FROM CustomerDiscountGroup WHERE CustomerDiscountGroup.DateTimeCreated >= '{{FROM_DATE}}' AND CustomerDiscountGroup.DateTimeCreated &lt; '{{TO_DATE}}'</query>
+		<query key="DiscountType">SELECT * FROM DiscountType</query>
+		<query key="DocumentPrintStatus">SELECT * FROM DocumentPrintStatus</query>
+		DocumentProcessStatus:		"SELECT * FROM DocumentProcessStatus"
+	DocumentStatus:				"SELECT * FROM DocumentStatus"
+	POPReceiptReturn:			"SELECT * FROM POPReceiptReturn WHERE POPReceiptReturn.DateTimeCreated >= '{{FROM_DATE}}' AND POPReceiptReturn.DateTimeCreated &lt; '{{TO_DATE}}'"
+	PriceBandType:				"SELECT * FROM PriceBandType WHERE PriceBandType.DateTimeCreated >= '{{FROM_DATE}}' AND PriceBandType.DateTimeCreated &lt;'{{TO_DATE}}'"
+	SLAllocationType:			"SELECT * FROM SLAllocationType"
+	SOPDespatchReceiptType:		"SELECT * FROM SOPDespatchReceiptType"
+	SOPInvoiceCreditType:		"SELECT * FROM SOPInvoiceCreditType"
+	SOPUser:					"SELECT * FROM SOPUser"
+	StockItemStatus:			"SELECT * FROM StockItemStatus"
+	StockItemType:				"SELECT * FROM StockItemType"
+	StocktakeSelector:			"SELECT * FROM StocktakeSelector"
+	StocktakeStatus:			"SELECT * FROM StocktakeStatus"
+	StocktakeType:				"SELECT * FROM StocktakeType"
+	SYSCountryCode:				"SELECT * FROM SYSCountryCode WHERE SYSCountryCode.DateTimeCreated >= '{{FROM_DATE}}' AND SYSCountryCode.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SYSCurrencyISOCode:			"SELECT * FROM SYSCurrencyISOCode WHERE SYSCurrencyISOCode.DateTimeCreated >= '{{FROM_DATE}}' AND SYSCurrencyISOCode.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SYSTaxRate:					"SELECT * FROM SYSTaxRate WHERE SYSTaxRate.DateTimeCreated >= '{{FROM_DATE}}' AND SYSTaxRate.DateTimeCreated &lt; '{{TO_DATE}}'"
+	TransactionType:			"SELECT * FROM TransactionType WHERE TransactionType.DateTimeCreated >= '{{FROM_DATE}}' AND TransactionType.DateTimeCreated &lt; '{{TO_DATE}}'"
+	WarehouseType:				"SELECT * FROM WarehouseType"
+	WriteOffCategory:			"SELECT * FROM WriteOffCategory WHERE WriteOffCategory.DateTimeCreated >= '{{FROM_DATE}}' AND WriteOffCategory.DateTimeCreated &lt; '{{TO_DATE}}'"
+	AnalysisCodeValue:			"SELECT * FROM AnalysisCodeValue WHERE AnalysisCodeValue.DateTimeCreated >= '{{FROM_DATE}}' AND AnalysisCodeValue.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPAnalysisCode:			"SELECT * FROM SOPAnalysisCode WHERE SOPAnalysisCode.DateTimeCreated >= '{{FROM_DATE}}' AND SOPAnalysisCode.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPAnalysisCode:			"SELECT * FROM POPAnalysisCode WHERE POPAnalysisCode.DateTimeCreated >= '{{FROM_DATE}}' AND POPAnalysisCode.DateTimeCreated &lt; '{{TO_DATE}}'"
+	ProductGroup:				"SELECT * FROM ProductGroup WHERE ProductGroup.DateTimeCreated >= '{{FROM_DATE}}' AND ProductGroup.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPOrdReturnLineDelAddress:	"SELECT * FROM POPOrdReturnLineDelAddress WHERE POPOrdReturnLineDelAddress.DateTimeCreated >= '{{FROM_DATE}}' AND POPOrdReturnLineDelAddress.DateTimeCreated &lt; '{{TO_DATE}}'"
+	Warehouse:					"SELECT * FROM Warehouse WHERE Warehouse.DateTimeCreated >= '{{FROM_DATE}}' AND Warehouse.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SYSCountryCodeTaxMask:		"SELECT * FROM SYSCountryCodeTaxMask WHERE SYSCountryCodeTaxMask.DateTimeCreated >= '{{FROM_DATE}}' AND SYSCountryCodeTaxMask.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SYSCurrency:				"SELECT * FROM SYSCurrency WHERE SYSCurrency.DateTimeCreated >= '{{FROM_DATE}}' AND SYSCurrency.DateTimeCreated &lt; '{{TO_DATE}}'"
+	INVInvCredTaxItem:			"SELECT * FROM INVInvCredTaxItem WHERE INVInvCredTaxItem.DateTimeCreated >= '{{FROM_DATE}}' AND INVInvCredTaxItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPAdditionalCharge:		"SELECT * FROM SOPAdditionalCharge WHERE SOPAdditionalCharge.DateTimeCreated >= '{{FROM_DATE}}' AND SOPAdditionalCharge.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPAdditionalCharge:		"SELECT * FROM POPAdditionalCharge WHERE POPAdditionalCharge.DateTimeCreated >= '{{FROM_DATE}}' AND POPAdditionalCharge.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StockItem:					"SELECT * FROM StockItem WHERE StockItem.DateTimeCreated >= '{{FROM_DATE}}' AND StockItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	Stocktake:					"SELECT * FROM Stocktake WHERE Stocktake.DateTimeCreated >= '{{FROM_DATE}}' AND Stocktake.DateTimeCreated &lt; '{{TO_DATE}}'"
+	PLSupplierAccount:			"SELECT * FROM PLSupplierAccount WHERE PLSupplierAccount.DateTimeCreated >= '{{FROM_DATE}}' AND PLSupplierAccount.DateTimeCreated &lt; '{{TO_DATE}}'"
+	PriceBand:					"SELECT * FROM PriceBand WHERE PriceBand.DateTimeCreated >= '{{FROM_DATE}}' AND PriceBand.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StockItemSupplier:			"SELECT * FROM StockItemSupplier WHERE StockItemSupplier.DateTimeCreated >= '{{FROM_DATE}}' AND StockItemSupplier.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StockItemDiscount:			"SELECT * FROM StockItemDiscount WHERE StockItemDiscount.DateTimeCreated >= '{{FROM_DATE}}' AND StockItemDiscount.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StockItemMemo:				"SELECT * FROM StockItemMemo WHERE StockItemMemo.DateTimeCreated >= '{{FROM_DATE}}' AND StockItemMemo.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StockItemPrice:				"SELECT * FROM StockItemPrice WHERE StockItemPrice.DateTimeCreated >= '{{FROM_DATE}}' AND StockItemPrice.DateTimeCreated &lt; '{{TO_DATE}}'"
+	WarehouseItem:				"SELECT * FROM WarehouseItem WHERE WarehouseItem.DateTimeCreated >= '{{FROM_DATE}}' AND WarehouseItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	AlternativeItem:			"SELECT * FROM AlternativeItem WHERE AlternativeItem.DateTimeCreated >= '{{FROM_DATE}}' AND AlternativeItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StocktakeCountSheetItem:	"SELECT * FROM StocktakeCountSheetItem WHERE StocktakeCountSheetItem.DateTimeCreated >= '{{FROM_DATE}}' AND StocktakeCountSheetItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StocktakeItem:				"SELECT * FROM StocktakeItem WHERE StocktakeItem.DateTimeCreated >= '{{FROM_DATE}}' AND StocktakeItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPOrderReturn:				"SELECT * FROM POPOrderReturn WHERE POPOrderReturn.DateTimeCreated >= '{{FROM_DATE}}' AND POPOrderReturn.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLCustomerAccount:			"SELECT * FROM SLCustomerAccount WHERE SLCustomerAccount.DateTimeCreated >= '{{FROM_DATE}}' AND SLCustomerAccount.DateTimeCreated &lt; '{{TO_DATE}}'"
+	CustStockItemDiscount:		"SELECT * FROM CustStockItemDiscount WHERE CustStockItemDiscount.DateTimeCreated >= '{{FROM_DATE}}' AND CustStockItemDiscount.DateTimeCreated &lt; '{{TO_DATE}}' AND CustStockItemDiscount.StockItemDiscountID IN(SELECT StockItemDiscount.StockItemDiscountID FROM StockItemDiscount)"
+	POPOnOrderBalance:			"SELECT * FROM POPOnOrderBalance WHERE POPOnOrderBalance.DateTimeCreated >= '{{FROM_DATE}}' AND POPOnOrderBalance.DateTimeCreated &lt; '{{TO_DATE}}'"
+	StocktakeLiveBinItem:		"SELECT * FROM StocktakeLiveBinItem WHERE StocktakeLiveBinItem.StocktakeID IN(SELECT Stocktake.StocktakeID)"
+	POPDocDelAddress:			"SELECT * FROM POPDocDelAddress WHERE POPDocDelAddress.DateTimeCreated >= '{{FROM_DATE}}' AND POPDocDelAddress.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPOrderReturnLine:			"SELECT * FROM POPOrderReturnLine WHERE POPOrderReturnLine.DateTimeCreated >= '{{FROM_DATE}}' AND POPOrderReturnLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPReceiptReturnLine:		"SELECT * FROM POPReceiptReturnLine WHERE POPReceiptReturnLine.DateTimeCreated >= '{{FROM_DATE}}' AND POPReceiptReturnLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLAccountMemo:				"SELECT * FROM SLAccountMemo WHERE SLAccountMemo.DateTimeCreated >= '{{FROM_DATE}}' AND SLAccountMemo.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLCustomerLocation:			"SELECT * FROM SLCustomerLocation WHERE SLCustomerLocation.DateTimeCreated >= '{{FROM_DATE}}' AND SLCustomerLocation.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLCustomerContact:			"SELECT * FROM SLCustomerContact WHERE SLCustomerContact.DateTimeCreated >= '{{FROM_DATE}}' AND SLCustomerContact.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLPostedCustomerTran:		"SELECT * FROM SLPostedCustomerTran WHERE SLPostedCustomerTran.DateTimeCreated >= '{{FROM_DATE}}' AND SLPostedCustomerTran.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLAllocationHeader:			"SELECT * FROM SLAllocationHeader WHERE SLAllocationHeader.DateTimeCreated >= '{{FROM_DATE}}' AND SLAllocationHeader.DateTimeCreated &lt; '{{TO_DATE}}'"
+	CustDeliveryAddress:		"SELECT * FROM CustDeliveryAddress WHERE CustDeliveryAddress.DateTimeCreated >= '{{FROM_DATE}}' AND CustDeliveryAddress.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPOrderReturn:				"SELECT * FROM SOPOrderReturn WHERE SOPOrderReturn.DateTimeCreated >= '{{FROM_DATE}}' AND SOPOrderReturn.DateTimeCreated &lt; '{{TO_DATE}}'"
+	POPOnOrderLine:				"SELECT * FROM POPOnOrderLine WHERE POPOnOrderLine.DateTimeCreated >= '{{FROM_DATE}}' AND POPOnOrderLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	RequestedDeliveryDate:		"SELECT * FROM RequestedDeliveryDate WHERE RequestedDeliveryDate.DateTimeCreated >= '{{FROM_DATE}}' AND RequestedDeliveryDate.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SLAllocationTran:			"SELECT * FROM SLAllocationTran WHERE SLAllocationTran.DateTimeCreated >= '{{FROM_DATE}}' AND SLAllocationTran.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPDocDelAddress:			"SELECT * FROM SOPDocDelAddress WHERE SOPDocDelAddress.DateTimeCreated >= '{{FROM_DATE}}' AND SOPDocDelAddress.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPDespatchReceipt:			"SELECT * FROM SOPDespatchReceipt WHERE SOPDespatchReceipt.DateTimeCreated >= '{{FROM_DATE}}' AND SOPDespatchReceipt.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPCancelledLine:			"SELECT * FROM SOPCancelledLine WHERE SOPCancelledLine.DateTimeCreated >= '{{FROM_DATE}}' AND SOPCancelledLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPOrderReturnLine:			"SELECT * FROM SOPOrderReturnLine WHERE SOPOrderReturnLine.DateTimeCreated >= '{{FROM_DATE}}' AND SOPOrderReturnLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPInvoiceCredit:			"SELECT * FROM SOPInvoiceCredit WHERE SOPInvoiceCredit.DateTimeCreated >= '{{FROM_DATE}}' AND SOPInvoiceCredit.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPDespatchReceiptLine:		"SELECT * FROM SOPDespatchReceiptLine WHERE SOPDespatchReceiptLine.DateTimeCreated >= '{{FROM_DATE}}' AND SOPDespatchReceiptLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPAllocationLine:			"SELECT * FROM SOPAllocationLine WHERE SOPAllocationLine.DateTimeCreated >= '{{FROM_DATE}}' AND SOPAllocationLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPInvoiceCreditLine:		"SELECT * FROM SOPInvoiceCreditLine WHERE SOPInvoiceCreditLine.DateTimeCreated >= '{{FROM_DATE}}' AND SOPInvoiceCreditLine.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPInvCredTaxItem:			"SELECT * FROM SOPInvCredTaxItem WHERE SOPInvCredTaxItem.DateTimeCreated >= '{{FROM_DATE}}' AND SOPInvCredTaxItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPInvCredNominalItem:		"SELECT * FROM SOPInvCredNominalItem WHERE SOPInvCredNominalItem.DateTimeCreated >= '{{FROM_DATE}}' AND SOPInvCredNominalItem.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPInvCredDelAddress:		"SELECT * FROM SOPInvCredDelAddress WHERE SOPInvCredDelAddress.DateTimeCreated >= '{{FROM_DATE}}' AND SOPInvCredDelAddress.DateTimeCreated &lt; '{{TO_DATE}}'"
+	SOPInvCredAddress:			"SELECT * FROM SOPInvCredAddress WHERE SOPInvCredAddress.DateTimeCreated >= '{{FROM_DATE}}' AND SOPInvCredAddress.DateTimeCreated &lt; '{{TO_DATE}}'"
+	-->
+	</queries>
+</config>

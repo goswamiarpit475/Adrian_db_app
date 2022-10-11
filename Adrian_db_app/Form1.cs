@@ -273,27 +273,58 @@ namespace Adrian_db_app
             }
             return response;
         }
+        public string postXMLData2(string destinationUrl, string requestXml, string type)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(destinationUrl);
+
+            var postData = "thing1=" + Uri.EscapeDataString(requestXml);
+            //postData += "&thing2=" + Uri.EscapeDataString("world");
+            var data = Encoding.ASCII.GetBytes(postData);
+
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            return responseString.ToString();
+
+        }
         public string postXMLData(string destinationUrl, string requestXml, string type)
         {
-            //destinationUrl = "https://httpbin.org/anything";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
-            byte[] bytes;
-            bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
-            request.ContentType = "text/" + type + "; encoding='utf-8'";
-            request.ContentLength = bytes.Length;
-            request.Method = "POST";
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
-            HttpWebResponse response;
-            response = (HttpWebResponse)request.GetResponse();
-            if (response.StatusCode == HttpStatusCode.OK)
+            try
             {
-                Stream responseStream = response.GetResponseStream();
-                string responseStr = new StreamReader(responseStream).ReadToEnd();
-                return responseStr;
+                //destinationUrl = "https://httpbin.org/anything";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(destinationUrl);
+                byte[] bytes;
+                bytes = System.Text.Encoding.ASCII.GetBytes(requestXml);
+                request.ContentType = "text/plain";//"text/" + type + "; encoding='utf-8'";
+                request.ContentLength = bytes.Length;
+                request.Method = "POST";
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(bytes, 0, bytes.Length);
+                requestStream.Close();
+                HttpWebResponse response;
+                response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream responseStream = response.GetResponseStream();
+                    string responseStr = new StreamReader(responseStream).ReadToEnd();
+                    return responseStr;
+                }
+                return null;
             }
-            return null;
+            catch(WebException ex)
+            {
+                MessageBox.Show("error in posting data to url");
+                return null;
+            }
         }
 
         private string GetEpochTime()

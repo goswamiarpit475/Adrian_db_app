@@ -1,8 +1,8 @@
 <config>
 	<connectionStrings>
-		<connectionString key="1">Data Source=DESKTOP-AIEB1UD;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
-		<connectionString key="2">Data Source=DESKTOP-AIEB1UD;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
-		<connectionString key="3">Data Source=DESKTOP-AIEB1UD;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
+		<connectionString key="1">Data Source=DESKTOP-*****;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
+		<connectionString key="2">Data Source=DESKTOP-*****;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
+		<connectionString key="3">Data Source=DESKTOP-*****;Initial Catalog=testdb;Integrated Security=SSPI;</connectionString>
 	</connectionStrings>
 	<last_run_date>09/26/2022</last_run_date>
 	<output>
